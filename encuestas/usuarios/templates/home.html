@@ -1,0 +1,85 @@
+{% extends "base_us.html" %}
+{% block title %}
+Login
+{% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <!-- Cosas que muestra para el administrador  -->
+    {% if request.user.is_staff %}
+
+    <div class="container card mb-3">
+    <h2 class="app-page-title">  Encuestas</h2>
+    <table class="table">
+        <thead>
+            <th>No.</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+            {% for user in usuarios %}
+            <tr>
+{#                {% if user.username != "admin" %}#}
+                <td>{{user.username}}</td>
+                <td>{{user.first_name}} {{user.last_name}}</td>
+
+                <td>
+                    <a href="" class="btn btn-primary btn-sm">Modificar</a>
+                </td>
+            </tr>
+
+{#                {% endif %}#}
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    {% else %}
+    {% if user.is_authenticated %}
+<div class="card-deck card mb-3">
+<!-- Cosas que muestra para el alumno  -->
+  {% if request.user.groups.all.0.name == "alumno" %}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Encuesta Recien Egresado Licenciatura</h5>
+      <p class="card-text">¿Acabas o estas a punto de terminar tu carrera? ¡Contesta la encuesta ahora!.</p>
+        <a class="d-flex card-text justify-content-center mt-3 login_container" href="#">Iniciar Test</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Encuesta Recien Egresado Posgrado</h5>
+      <p class="card-text">¿Acabas o estas a punto de terminar tu posgrado? ¡Contesta la encuesta ahora!.</p>
+       <a class="d-flex card-text justify-content-center mt-3 login_container" href="#">Acceder</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Encuesta Empleadores</h5>
+      <p class="card-text">¿Tienes de empleado a algún egresado de la UAZ? ¡Contesta la encuesta ahora!</p>
+      <a class="d-flex card-text justify-content-center mt-3 login_container" href="#">Acceder</a>
+    </div>
+
+  </div>
+      <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Encuesta Egresados Licenciatura</h5>
+      <p class="card-text">¿Llevas algunos años integrado en el campo laboral? ¡Contesta la encuesta ahora!</p>
+      <a class="d-flex card-text justify-content-center mt-3 login_container" href="#">Acceder</a>
+    </div>
+  </div>
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Encuesta Egresado Posgrado</h5>
+      <p class="card-text">¿Llevas algunos años integrado en el campo laboral? ¡Contesta la encuesta ahora!</p>
+      <a class="d-flex card-text justify-content-center mt-3 login_container" href="#">Acceder</a>
+    </div>
+  </div>
+</div>
+    {% endif %}
+    {% endif %}
+    {% endif %}
+
+{% endblock %}
